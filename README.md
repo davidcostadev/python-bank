@@ -17,3 +17,8 @@
 **Testando apenas um arquivo**
 
 `py.test test/test_diego-bank.py`
+
+
+**Exemplo de test funcionando**
+
+`py.test test/test_exemplo.py`
