@@ -6,7 +6,24 @@ class HistoricoTest(unittest.TestCase):
         """ Deve criar uma variavel transacoes com uma lista vazia"""
         historico = Historico()
 
-        self.assertEqual(historico.transacoes, [])
+        self.assertEqual(len(historico.transacoes), 0)
+    
+    def test_add_transacao(self):
+        """ Deve adicionar uma transacao na lista """
+        historico = Historico()
+
+        self.assertEqual(len(historico.transacoes), 0)
+
+        historico.add_transacao('saque', 10.45)
+
+        self.assertEqual(len(historico.transacoes), 1)
+
+        transacao = historico.transacoes[0]
+
+        self.assertEqual(transacao, {
+            'tipo': 'saque',
+            'valor': 10.45
+        })
 
 
 
