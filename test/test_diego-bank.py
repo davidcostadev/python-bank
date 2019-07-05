@@ -24,10 +24,34 @@ class HistoricoTest(unittest.TestCase):
             'tipo': 'saque',
             'valor': 10.45
         })
+    
+    def test_add_transacao_validar_valores(self):
+        """ Deve dar error ao adicionar transacoes com valores igual ou abaixo que zero """
+        historico = Historico()
+        with self.assertRaisesRegex(Exception, 'Error: O valor precisa ser maior do que zero.'): 
+          historico.add_transacao('saque', 0)
 
+        with self.assertRaisesRegex(Exception, 'Error: O valor precisa ser maior do que zero.'): 
+          historico.add_transacao('saque', -1)
+    
+    def test_add_transacao_validar_tipos(self):
+        """ Deve dar error ao adicionar transacoes com tipos invalidos """
+        historico = Historico()
+        with self.assertRaisesRegex(Exception, 'Error: Tipo inválido. Precisa ser "saque" ou "deposito"'): 
+          historico.add_transacao('emprestimo', 100)
 
+    def test_get_transacoes(self):
+      """ Deve retornar a lista de todas as transacoes """
 
+      historico = Historico()
 
+      self.assertEqual(len(historico.get_transacoes()), 0)
+
+      historico.add_transacao('saque', 10.45)
+      historico.add_transacao('deposito', 100)
+      historico.add_transacao('saque', 20)
+
+      self.assertEqual(len(historico.get_transacoes()), 3)
 
 if __name__ == '__main__':
     unittest.main()
